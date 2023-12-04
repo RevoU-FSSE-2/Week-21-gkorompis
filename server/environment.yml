@@ -3,5 +3,6 @@ name: todos-app-server
 dependencies:
   - python=3.8
   - flask
-  - flask_cors
+  - flask-cors
   - "pymongo[srv]"
+  - python-dotenv
