@@ -1,0 +1,5 @@
+name: todos-app-server
+
+dependencies:
+  - python=3.8
+  - flask
