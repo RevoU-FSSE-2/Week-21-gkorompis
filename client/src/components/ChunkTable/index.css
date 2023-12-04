@@ -1,0 +1,58 @@
+
+/* css chunk table */
+.chunks-table-div {
+    /* background-color: blueviolet; */
+    width: 100%;
+    margin-right: 0px;
+    /* padding-right: 50px; */
+    display: flex;
+    padding: 0px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    padding-right: 50px;
+}
+
+th,
+td {
+    padding-block: 0px;
+    text-align: left;
+    color: #ffffff7d;
+}
+
+th {
+    /* background-color: rgb(231, 231, 232); */
+    /* background-color: rgba(36, 80, 69, 0.914); */
+    /* border-bottom: solid 3px rgb(255, 255, 255); */
+    background-color: rgba(32, 35, 35, 0.791);;
+}
+
+th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.chunk-container {
+    padding-block: 0px;
+}
+
+.chunks-row {
+    padding-block: 10px;
+    padding-inline: 20px;
+    font-size: 13px
+}
+
+.chunks-row-body {
+    border-bottom: 2px solid rgba(32, 35, 35, 0.791);;
+}
+
+.row-link {
+    cursor: pointer;
+}

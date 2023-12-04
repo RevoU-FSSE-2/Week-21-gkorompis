@@ -1,0 +1,39 @@
+.app-navbar {
+    display: grid;
+    grid-template-columns: 0.13fr 0.87fr;
+}
+
+.app-navbar-logo {
+    /* background-color: aquamarine; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-navbar-text {
+    margin: 0px;
+    padding: 0px;
+    font-size: 30px;
+    color: #ffffffc8;
+    letter-spacing: 5px;
+
+}
+
+.app-navbar-anchors {
+    /* background-color: rgb(20, 74, 56); */
+    padding-right: 50px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.app-navbar-anchors-text {
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 17px;
+    color: #ffffffc8;
+
+    margin-left: 29px;
+    text-decoration: none;
+}

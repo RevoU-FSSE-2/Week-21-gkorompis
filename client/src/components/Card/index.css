@@ -1,0 +1,49 @@
+.card-div {
+    /* background-color: aliceblue; */
+    padding: 9px;
+    height: 150px;
+}
+.card {
+    background-color: rgba(32, 35, 35, 0.791);
+    height: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    color: #ffffff7d;
+}
+.card-text-title {
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+.card-text-footer {
+    margin: 0px;
+    padding: 0px;
+    font-size: 11px;
+}
+
+.card-status-bar{
+    /* background-color: aliceblue; */
+    height: 60%;
+    margin-top: 13px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+.status-bar{
+    background-color: rgba(36, 80, 69, 0.428);
+    height: 100%;
+    width: 95%;
+    border-radius: 5px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+   
+.card-status-text {
+    font-size: 20px;
+    letter-spacing: 5px;
+}
+
