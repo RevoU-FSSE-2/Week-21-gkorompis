@@ -1,16 +1,15 @@
 from flask import Flask
+from routes.jobs.index import jobs_blueprint
 
 app = Flask(__name__)
 
-
-# define routes
 @app.route('/')
 def index():
-        return "Welcome"
+        return "modular todos app server api"
 
-@app.route('/api/data')
-def get_data():
-        return 'data from api'
+#registered modular routes
+app.register_blueprint(jobs_blueprint, url_prefix="/jobs")
+
 
 if __name__ == '__main__':
-        app.run(debug=True)
+    app.run(debug=True)
