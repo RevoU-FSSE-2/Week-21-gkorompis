@@ -1,7 +1,9 @@
 from flask import Flask
+from flask_cors import CORS
 from routes.jobs.index import jobs_blueprint
 
 app = Flask(__name__)
+cors = CORS(app)
 
 @app.route('/')
 def index():
