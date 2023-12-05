@@ -1,7 +1,5 @@
 # SIMPLE FLASK APP
 
-![Screen Shot 2023-11-02 at 19 59 22](https://github.com/RevoU-FSSE-2/week-18-gkorompis/assets/52250424/1033bfb5-79e9-40b6-98fd-bc190a22a724)
-
 ## 1. Project Overview
 
 This is a simple python-based flask application that demonstrates the following deliverables:
