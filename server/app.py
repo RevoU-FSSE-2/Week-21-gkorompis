@@ -12,6 +12,5 @@ def index():
 #registered modular routes
 app.register_blueprint(jobs_blueprint, url_prefix="/jobs")
 
-
 if __name__ == '__main__':
     app.run(debug=True)
