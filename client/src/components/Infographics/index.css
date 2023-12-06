@@ -45,7 +45,7 @@
     margin: 0px;
     padding: 0px;
     letter-spacing: 2px;
-    color: #ffffff7d;
+    color: #ffffffcb;
     /* font-size: 10px; */
 }
 .info-job-count-text{
@@ -53,14 +53,14 @@
     padding: 0px;
     font-size: 50px;
     margin-right: 15px;
-    color: #ffffff7d;
+    color: #ffffffe2;
     
 }
 .info-job-count-label-text {
     margin: 0px;
     padding: 0px;
     font-size: 20px;
-    color: #ffffff7d;
+    color: #ffffffe2;
     align-self: center;
 }
 .table-decks {
