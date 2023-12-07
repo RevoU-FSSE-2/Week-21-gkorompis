@@ -6,7 +6,6 @@ from datetime import datetime
 def validate_jwt_token(token, secret):
     try:
         print(">>> token", token)
-        print(">>> secret", secret)
         decodedToken = decode(token, secret, algorithms=["HS256"])
         print(">>> decoded", decodedToken)
         #check expired token
