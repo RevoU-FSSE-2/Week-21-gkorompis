@@ -1,8 +1,8 @@
 from flask import Blueprint, request
 
-from controller.tweets.get import get_tweets, get_params_tweet, get_one_tweets
+from controller.tweets.get import get_tweets, get_params_tweet, get_one_tweets, pull_item_tweet
 from controller.tweets.post import post_tweet
-from controller.tweets.put import put_params_tweet
+from controller.tweets.put import put_params_tweet, append_item_tweet
 from controller.tweets.delete import delete_params_tweet
 
 from wrapper.protect_route import protect_route
@@ -39,3 +39,15 @@ def put_params_route(id):
 @protect_route
 def delete_params_route(id):
     return delete_params_tweet(id)
+
+
+tweets_aggregator_params_blueprint = Blueprint("tweets_aggregator", __name__)
+@tweets_aggregator_params_blueprint.route("/tweets/pull-items/<id>", methods=["GET"])
+@protect_route
+def pull_item_route(id):
+    return pull_item_tweet(id)
+
+@tweets_aggregator_params_blueprint.route("/tweets/append-item/<id>", methods=["PUT"])
+@protect_route
+def apppend_item_route(id):
+    return append_item_tweet(id)

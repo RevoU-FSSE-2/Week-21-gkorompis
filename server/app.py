@@ -3,7 +3,7 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
 from routes.jobs.index import jobs_blueprint, jobs_params_blueprint
-from routes.tweets.index import tweets_blueprint, tweets_params_blueprint
+from routes.tweets.index import tweets_blueprint, tweets_params_blueprint, tweets_aggregator_params_blueprint
 from routes.profiles.index import profiles_blueprint, profiles_params_blueprint
 from routes.users.index import users_blueprint, users_params_blueprint
 
@@ -27,6 +27,7 @@ app.register_blueprint(jobs_params_blueprint, url_prefix="/jobs/<id>")
 
 app.register_blueprint(tweets_blueprint, url_prefix="/tweets")
 app.register_blueprint(tweets_params_blueprint, url_prefix="/tweets/<id>")
+app.register_blueprint(tweets_aggregator_params_blueprint)
 
 app.register_blueprint(profiles_blueprint, url_prefix="/profiles")
 app.register_blueprint(profiles_params_blueprint, url_prefix="/profiles/<id>")

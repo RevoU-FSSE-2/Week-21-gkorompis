@@ -33,10 +33,15 @@ def dao_update_one(dict_query, dict_update):
     except Exception as e:
         return str(e)
 
-# def dao_read_one(dict_query):
-#     dict_query = dict_query or {}
-#     collection = collections["tweets"]
-#     result = collection.find_one(dict_query)
-#     result = list(result)
-#     print(">>>response find", type(result))
-#     return result
+def dao_append_items(parent_id, new_item):
+    try:
+        collection = collections["tweets"]
+        result_append = collection.update_one(
+            {"_id": parent_id},
+            {"$push": {"comments": new_item}}
+        )
+        print(">>> result append items", type(result_append), result_append)
+        return result_append
+    except Exception as e:
+        message = {"message": str(e)}
+        print(">>>error at dao_pull_items:", message)
