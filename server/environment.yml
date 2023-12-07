@@ -7,3 +7,4 @@ dependencies:
   - "pymongo[srv]"
   - python-dotenv
   - Flask-JWT-Extended
+  - bcrypt

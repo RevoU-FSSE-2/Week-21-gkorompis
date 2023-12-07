@@ -4,11 +4,13 @@ from bson import ObjectId
 
 def get_users():
     try:
+        print(">>>controller get_users", request.method)
         if request.method == "GET":
             dict_query = request.args.to_dict()
             print(">>> query to read many in users:", dict_query)
             result_read_many = dao_read_many(dict_query)
         response = result_read_many or {}
+        print(">>result controller get_users", response)
         return jsonify(response)
     except Exception as e:
         message = {"message": str(e)}

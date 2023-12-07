@@ -6,6 +6,7 @@ from controller.users.put import put_params_user
 from controller.users.delete import delete_params_user
 
 from wrapper.protect_route import protect_route
+from wrapper.hash_password import hash_password
 
 users_blueprint = Blueprint("users", __name__)
 @users_blueprint.route("/", methods=["GET"])
@@ -20,8 +21,9 @@ def get_route():
     
 @users_blueprint.route("/", methods=["POST"])
 @protect_route
-def post_route():
-    return post_user()
+@hash_password
+def post_route(wrapper_data):
+    return post_user(wrapper_data)
 
 
 users_params_blueprint = Blueprint("users_one", __name__)
