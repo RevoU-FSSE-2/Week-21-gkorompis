@@ -1,12 +1,12 @@
 from flask import jsonify, request
-from model.jobs.dao.read import dao_read_many, dao_read_one
-from bson import ObjectId
+from model.tweets.dao.read import dao_read_many, dao_read_one
 
-def get_jobs():
+
+def get_tweets():
     try:
         if request.method == "GET":
             dict_query = request.args.to_dict()
-            print(">>> query to read many in jobs:", dict_query)
+            print(">>> query to read many in tweets:", dict_query)
             result_read_many = dao_read_many(dict_query)
         response = result_read_many or {}
         return jsonify(response)
@@ -14,11 +14,11 @@ def get_jobs():
         message = {"message": str(e)}
         return jsonify(message)
 
-def get_one_jobs(job_id):
+def get_one_tweets(tweet_id):
     try:
         if request.method == "GET":
-            dict_query = {"_id": job_id}
-            print(">>> query to read one in jobs:", dict_query)
+            dict_query = {"_id": tweet_id}
+            print(">>> query to read one in tweets:", dict_query)
             result_read_one = dao_read_one(dict_query)
         response = result_read_one or {}
         return jsonify(response)
@@ -26,11 +26,11 @@ def get_one_jobs(job_id):
         message = {"message": str(e)}
         return jsonify(message)
 
-def get_params_job(job_id):
+def get_params_tweet(tweet_id):
     try:
         if request.method == "GET":
-            dict_query = {"_id": job_id}
-            print(">>> query to read params in jobs:", dict_query)
+            dict_query = {"_id": tweet_id}
+            print(">>> query to read params in tweets:", dict_query)
             result_read_one = dao_read_one(dict_query)
         response = result_read_one or {}
         return jsonify(response)

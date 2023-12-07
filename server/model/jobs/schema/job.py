@@ -5,7 +5,7 @@ from typing import List
 class Job:
     def __init__(self, created_by:str, job:str, job_progress:str, permission: List[str]):
         self._id = str(ObjectId())
-        self.createdBy = created_by,
+        self.createdBy = created_by
         self.job = job
         self.jobProgress = job_progress
         self.permission = permission

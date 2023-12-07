@@ -6,3 +6,4 @@ dependencies:
   - flask-cors
   - "pymongo[srv]"
   - python-dotenv
+  - Flask-JWT-Extended
