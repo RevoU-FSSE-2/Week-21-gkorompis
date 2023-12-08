@@ -8,6 +8,7 @@ from controller.users.delete import delete_params_user
 from wrapper.protect_route import protect_route
 from wrapper.hash_password import hash_password
 from wrapper.permit_role import permit_role_custom
+from wrapper.restrict_post import restrict_post_user
 
 users_blueprint = Blueprint("users", __name__)
 @users_blueprint.route("/", methods=["GET"])
@@ -27,6 +28,7 @@ def get_route(wrapper_data):
         return jsonify(errorMessage)
     
 @users_blueprint.route("/", methods=["POST"])
+@restrict_post_user
 @hash_password
 def post_route(wrapper_data):
     return post_user(wrapper_data)

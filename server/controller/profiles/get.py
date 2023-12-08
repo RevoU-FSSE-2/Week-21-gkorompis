@@ -2,11 +2,12 @@ from flask import jsonify, request
 from model.profiles.dao.read import dao_read_many, dao_read_one
 from bson import ObjectId
 
-def get_profiles():
+def get_profiles(restrict_query):
     try:
         if request.method == "GET":
             dict_query = request.args.to_dict()
             print(">>> query to read many in profiles:", dict_query)
+            dict_query = {**dict_query, **restrict_query}
             result_read_many = dao_read_many(dict_query)
         response = result_read_many or {}
         return jsonify(response)
