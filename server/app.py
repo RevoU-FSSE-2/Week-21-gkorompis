@@ -4,7 +4,7 @@ from flask_jwt_extended import JWTManager
 
 from routes.jobs.index import jobs_blueprint, jobs_params_blueprint
 from routes.tweets.index import tweets_blueprint, tweets_params_blueprint, tweets_aggregator_params_blueprint
-from routes.profiles.index import profiles_blueprint, profiles_params_blueprint
+from routes.profiles.index import profiles_blueprint, profiles_params_blueprint, profile_aggregator_params_blueprint
 from routes.users.index import users_blueprint, users_params_blueprint
 
 from routes.auth.index import auth_blueprint
@@ -31,11 +31,13 @@ app.register_blueprint(tweets_aggregator_params_blueprint)
 
 app.register_blueprint(profiles_blueprint, url_prefix="/profiles")
 app.register_blueprint(profiles_params_blueprint, url_prefix="/profiles/<id>")
+app.register_blueprint(profile_aggregator_params_blueprint)
 
 app.register_blueprint(users_blueprint, url_prefix="/users")
 app.register_blueprint(users_params_blueprint, url_prefix="/users/<id>")
 
 app.register_blueprint(auth_blueprint, url_prefix="/auth/login")
+
 
 @app.errorhandler(404)
 def not_found_error(error):

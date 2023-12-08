@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 
-from controller.profiles.get import get_profiles, get_params_profile, get_one_profiles
+from controller.profiles.get import get_profiles, get_params_profile, get_one_profiles, pull_item_profile, pull_item_profile_tweets
 from controller.profiles.post import post_profile
 from controller.profiles.put import put_params_profile
 from controller.profiles.delete import delete_params_profile
@@ -55,3 +55,43 @@ def put_params_route(id):
 @permit_role_custom(["admin"])
 def delete_params_route(id):
     return delete_params_profile(id)
+
+profile_aggregator_params_blueprint = Blueprint("profile_aggregator", __name__)
+@profile_aggregator_params_blueprint.route("/profile/pull-items/followers/<id>", methods=["GET"])
+@protect_route
+@permit_role_custom(["admin", "member"], "username")
+def pull_item_followers_route(wrapper_data):
+    try:
+        id = wrapper_data.get("id")
+        restrict_query = wrapper_data.get("restrict_query")
+        field = "followers"
+        return pull_item_profile(id, restrict_query, field)
+    except Exception as e:
+        errorMessage = {"message": str(e)}
+        return jsonify(errorMessage), 500
+
+@profile_aggregator_params_blueprint.route("/profile/pull-items/following/<id>", methods=["GET"])
+@protect_route
+@permit_role_custom(["admin", "member"], "username")
+def pull_item_following_route(wrapper_data):
+    try:
+        id = wrapper_data.get("id")
+        restrict_query = wrapper_data.get("restrict_query")
+        field = "following"
+        return pull_item_profile(id, restrict_query, field)
+    except Exception as e:
+        errorMessage = {"message": str(e)}
+        return jsonify(errorMessage), 500
+
+@profile_aggregator_params_blueprint.route("/profile/pull-items/tweets/<id>", methods=["GET"])
+@protect_route
+@permit_role_custom(["admin", "member"], "username")
+def pull_item_tweets_route(wrapper_data):
+    try:
+        id = wrapper_data.get("id")
+        restrict_query = wrapper_data.get("restrict_query")
+        field = "tweets"
+        return pull_item_profile_tweets(id, restrict_query, field)
+    except Exception as e:
+        errorMessage = {"message": str(e)}
+        return jsonify(errorMessage), 500
