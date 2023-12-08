@@ -1,5 +1,7 @@
 from flask import jsonify, request
 from model.users.dao.read import dao_read_one
+from model.profiles.dao.read import dao_read_one as dao_read_one_profile
+
 def restrict_post_user(func):
     try:
         def wrapper(*args, **kwargs):
@@ -35,3 +37,34 @@ def restrict_post_user(func):
     except Exception as e:
         errorMessage = {"message": str(e)}
         return jsonify(errorMessage), 500
+    
+
+
+def restrict_post_profile(func):
+    try:
+        def wrapper(*args, **kwargs):
+            try:
+                request_body = request.json
+                new_username = request_body.get('username')
+
+                if not request_body or not new_username:
+                    errorMessage = {"message": "Bad request!"}
+                    return jsonify(errorMessage), 400
+                
+                dict_query = {"username": new_username}
+                matchedUsername = dao_read_one_profile(dict_query)
+                print(">>>matchedUsername", matchedUsername)
+                if matchedUsername[0]:
+                    errorMessage = {"message": "username already registered"}
+                    return jsonify(errorMessage), 409
+                
+                return func(*args, **kwargs)
+            except Exception as e:
+                errorMessage = {"message": str(e)}
+                return jsonify(errorMessage), 500
+        wrapper.__name__ = func.__name__
+        return wrapper
+    except Exception as e:
+        errorMessage = {"message": str(e)}
+        return jsonify(errorMessage), 500
+

@@ -7,6 +7,7 @@ from controller.profiles.delete import delete_params_profile
 
 from wrapper.protect_route import protect_route
 from wrapper.permit_role import permit_role_custom
+from wrapper.restrict_post import restrict_post_profile
 
 profiles_blueprint = Blueprint("profiles", __name__)
 @profiles_blueprint.route("/", methods=["GET"])
@@ -23,6 +24,7 @@ def get_route(wrapper_data):
     
 @profiles_blueprint.route("/", methods=["POST"])
 @protect_route
+@restrict_post_profile
 @permit_role_custom(["admin", "member"] ,"username")
 def post_route(wrapper_data):
     try:
