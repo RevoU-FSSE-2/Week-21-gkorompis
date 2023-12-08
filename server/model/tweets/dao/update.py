@@ -33,11 +33,11 @@ def dao_update_one(dict_query, dict_update):
     except Exception as e:
         return str(e)
 
-def dao_append_items(parent_id, new_item):
+def dao_append_items(parent_id, restrict_query, new_item):
     try:
         collection = collections["tweets"]
         result_append = collection.update_one(
-            {"_id": parent_id},
+            {"_id": parent_id, **restrict_query},
             {"$push": {"comments": new_item}}
         )
         print(">>> result append items", type(result_append), result_append)
