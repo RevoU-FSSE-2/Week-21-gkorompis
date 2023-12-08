@@ -20,7 +20,7 @@ from model.jobs.dao.delete import dao_delete_one
 #     }
 # ]
 
-def delete_params_job(job_id):
+def delete_params_job(job_id, restrict_query=None):
     try:
         if request.method == "DELETE":
             dict_query = {"_id": job_id}

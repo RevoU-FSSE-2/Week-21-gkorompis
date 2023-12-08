@@ -29,10 +29,11 @@ def validate_jwt_token(token, secret):
 
 def protect_route(func):
     try:
-        def wrapper(*args, **kwargs):
+        def wrapper(id=None, *args, **kwargs):
             auth_header = request.headers.get('Authorization')
             print(">>>authorization headers", auth_header)
-
+            print(">>> id params at protect_route", id)
+            print(">>> args list", args)
             #check if token bearer is present or not, else 401
             if not auth_header or not auth_header.startswith("Bearer"):
                 errorMessage = {"message": "missing or invalid authorization header"}
@@ -46,9 +47,13 @@ def protect_route(func):
                 errorMessage = {"message": "Invalid token"}
                 return jsonify(errorMessage), 403
             
-            print(">>> token info", token_info)
+            wrapper_data = {
+                "id": id,
+                "token_info": token_info
+            }
+            print(">>> wrapper_data", wrapper_data)
             #if passed next
-            return func(*args, **kwargs)
+            return func(wrapper_data,*args, **kwargs)
         wrapper.__name__ = func.__name__
         return wrapper
     except Exception as e:

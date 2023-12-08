@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
@@ -37,6 +37,10 @@ app.register_blueprint(users_params_blueprint, url_prefix="/users/<id>")
 
 app.register_blueprint(auth_blueprint, url_prefix="/auth/login")
 
+@app.errorhandler(404)
+def not_found_error(error):
+    errorMessage = {"message": str(error)}
+    return jsonify(errorMessage), 404
 
 if __name__ == '__main__':
     app.run(debug=True)

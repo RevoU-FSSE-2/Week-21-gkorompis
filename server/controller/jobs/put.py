@@ -44,7 +44,7 @@ from bson import ObjectId
 #         result_read_many = str(result_read_many)
 #     return jsonify(result_read_many)
 
-def put_params_job(job_id):
+def put_params_job(job_id, restrict_query=None):
     try:
         if request.method == "PUT" or request.method == "PATCH":
             dict_query = {"_id": job_id}
