@@ -68,5 +68,5 @@ def put_params_job(job_id, restrict_query=None):
         print(">>> response at put_params_job", type(response), response)
         return jsonify(response)
     except Exception as e:
-        message = {"message": str(e)}
+        message = {"message": str(e), "script": f"error at, {put_params_job.__name__}!"}
         return jsonify(message)

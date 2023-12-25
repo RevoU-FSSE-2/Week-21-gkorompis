@@ -31,12 +31,23 @@ def get_route(wrapper_data):
 @permit_role_custom(["admin", "member"], "createdBy")
 def post_route(wrapper_data):
     try:
+        body = request.json
+        if not body:
+            errorMessage = {"message": "bad request. Body is expected"}
+            return jsonify(errorMessage), 400
         restrict_query = wrapper_data.get("restrict_query")
         print(">>>restrict query at post route", restrict_query)
         return post_tweet(restrict_query)
     except Exception as e:
         errorMessage = {"message": str(e)}
         return jsonify(errorMessage), 500
+
+
+
+
+
+
+
 
 tweets_params_blueprint = Blueprint("tweets_one", __name__)
 @tweets_params_blueprint.route("/", methods=["GET"])
@@ -72,6 +83,9 @@ def delete_params_route(wrapper_data):
     except Exception as e:
         errorMessage = {"message": str(e)}
         return jsonify(errorMessage), 500
+
+
+
 
 tweets_aggregator_params_blueprint = Blueprint("tweets_aggregator", __name__)
 @tweets_aggregator_params_blueprint.route("/tweets/pull-items/<id>", methods=["GET"])

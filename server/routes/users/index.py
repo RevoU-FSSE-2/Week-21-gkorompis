@@ -34,6 +34,8 @@ def post_route(wrapper_data):
     return post_user(wrapper_data)
 
 
+
+
 users_params_blueprint = Blueprint("users_one", __name__)
 @users_params_blueprint.route("/", methods=["GET"])
 @protect_route

@@ -48,7 +48,7 @@ def restrict_post_profile(func):
                 new_username = request_body.get('username')
 
                 if not request_body or not new_username:
-                    errorMessage = {"message": "Bad request!"}
+                    errorMessage = {"message": "Bad request!!"}
                     return jsonify(errorMessage), 400
                 
                 dict_query = {"username": new_username}

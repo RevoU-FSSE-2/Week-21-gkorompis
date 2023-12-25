@@ -56,6 +56,9 @@ def put_params_route(id):
 def delete_params_route(id):
     return delete_params_profile(id)
 
+
+
+
 profile_aggregator_params_blueprint = Blueprint("profile_aggregator", __name__)
 @profile_aggregator_params_blueprint.route("/profile/pull-items/followers/<id>", methods=["GET"])
 @protect_route
