@@ -15,7 +15,7 @@ def get_tweets(restrict_query):
         response = result_read_many or {}
         return jsonify(response)
     except Exception as e:
-        message = {"message": str(e)}
+        message = {"message": str(e), "script": f"error at, {get_tweets.__name__}!"}
         return jsonify(message)
 
 def get_one_tweets(tweet_id):
@@ -27,7 +27,7 @@ def get_one_tweets(tweet_id):
         response = result_read_one or {}
         return jsonify(response)
     except Exception as e:
-        message = {"message": str(e)}
+        message = {"message": str(e), "script": f"error at, {get_one_tweets.__name__}!"}
         return jsonify(message)
 
 def get_params_tweet(tweet_id, restrict_query):
@@ -40,7 +40,7 @@ def get_params_tweet(tweet_id, restrict_query):
         response = result_read_one or {}
         return jsonify(response)
     except Exception as e:
-        message = {"message": str(e)}
+        message = {"message": str(e), "script": f"error at, {get_params_tweet.__name__}!"}
         return jsonify(message)
     
 
@@ -58,8 +58,7 @@ def pull_item_tweet(tweet_id, restrict_query):
                 return jsonify({"pulledItems": []})
             print(">>> parent tweet", parent_tweet)
             comments = parent_tweet.get("comments")
-            
-
+            list_of_comments = []
             if comments:
                 list_of_comments = dao_pull_items(comments)
                 print(">>> type pulled_items", type(list_of_comments))
@@ -68,6 +67,6 @@ def pull_item_tweet(tweet_id, restrict_query):
             pulled_items = list_of_comments if list_of_comments else []
             return jsonify({"pulledItems": pulled_items})
     except Exception as e:
-        message = {"message": str(e)}
+        message = {"message": str(e), "script": f"error at, {pull_item_tweet.__name__}!"}
         return jsonify(message)
     

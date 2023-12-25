@@ -86,7 +86,7 @@ def delete_params_route(wrapper_data):
 tweets_aggregator_params_blueprint = Blueprint("tweets_aggregator", __name__)
 @tweets_aggregator_params_blueprint.route("/tweets/pull-items/<id>", methods=["GET"])
 @protect_route
-@permit_role_custom(["admin", "member"], "createdBy")
+# @permit_role_custom(["admin", "member"], "createdBy")
 def pull_item_route(wrapper_data):
     try:
         id = wrapper_data.get("id")
@@ -99,7 +99,7 @@ def pull_item_route(wrapper_data):
 
 @tweets_aggregator_params_blueprint.route("/tweets/append-item/<id>", methods=["PUT"])
 @protect_route
-@permit_role_custom(["admin", "member"], "createdBy")
+# @permit_role_custom(["admin", "member"], "createdBy")
 def apppend_item_route(wrapper_data):
     try:
         id = wrapper_data.get("id")
