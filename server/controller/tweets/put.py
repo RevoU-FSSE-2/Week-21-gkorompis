@@ -25,7 +25,7 @@ def put_params_tweet(tweet_id, restrict_query):
         print(">>> response at put_params_tweet", type(response), response)
         return jsonify(response)
     except Exception as e:
-        message = {"message": str(e)}
+        message = {"message": str(e), "script": f"error at, {put_params_tweet.__name__}!"}
         return jsonify(message)
     
 def append_item_tweet(tweet_id, restrict_query):
@@ -50,5 +50,5 @@ def append_item_tweet(tweet_id, restrict_query):
         print(">>> response at append_item_tweet", type(response), response)
         return jsonify(response)
     except Exception as e:
-        message = {"message": str(e)}
+        message = {"message": str(e), "script": f"error at, {append_item_tweet.__name__}!"}
         return jsonify(message)

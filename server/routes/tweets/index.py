@@ -23,7 +23,7 @@ def get_route(wrapper_data):
         else:
             return get_tweets(restrict_query)
     except Exception as e:
-        errorMessage = {"message": str(e)}
+        errorMessage = {"message": str(e), "script": f"error at, {get_route.__name__}!"}
         return jsonify(errorMessage), 500  
     
 @tweets_blueprint.route("/", methods=["POST"])
@@ -39,13 +39,8 @@ def post_route(wrapper_data):
         print(">>>restrict query at post route", restrict_query)
         return post_tweet(restrict_query)
     except Exception as e:
-        errorMessage = {"message": str(e)}
+        errorMessage = {"message": str(e), "script": f"error at, {post_route.__name__}!"}
         return jsonify(errorMessage), 500
-
-
-
-
-
 
 
 
@@ -59,32 +54,32 @@ def get_params_route(wrapper_data):
         restrict_query = wrapper_data.get("restrict_query")
         return get_params_tweet(id, restrict_query)
     except Exception as e:
-        errorMessage = {"message": str(e)}
+        errorMessage = {"message": str(e), "script": f"error at, {get_params_route.__name__}!"}
         return jsonify(errorMessage), 500
     
 @tweets_params_blueprint.route("/", methods=["PUT"])
 @protect_route
-@permit_role_custom(["admin"])
+@permit_role_custom(["admin", "member"], "createdBy")
 def put_params_route(wrapper_data):
     try:
         id = wrapper_data.get("id")
-        return put_params_tweet(id)
+        restrict_query = wrapper_data.get("restrict_query")
+        return put_params_tweet(id, restrict_query)
     except Exception as e:
-        errorMessage = {"message": str(e)}
+        errorMessage = {"message": str(e), "script": f"error at, {put_params_route.__name__}!"}
         return jsonify(errorMessage), 500
 
 @tweets_params_blueprint.route("/", methods=["DELETE"])
 @protect_route
-@permit_role_custom(["admin"])
+@permit_role_custom(["admin", "member"], "createdBy")
 def delete_params_route(wrapper_data):
     try:
         id = wrapper_data.get("id")
-        return delete_params_tweet(id)
+        restrict_query = wrapper_data.get("restrict_query")
+        return delete_params_tweet(id, restrict_query)
     except Exception as e:
-        errorMessage = {"message": str(e)}
+        errorMessage = {"message": str(e), "script": f"error at, {delete_params_route.__name__}!"}
         return jsonify(errorMessage), 500
-
-
 
 
 tweets_aggregator_params_blueprint = Blueprint("tweets_aggregator", __name__)
@@ -97,9 +92,10 @@ def pull_item_route(wrapper_data):
         restrict_query = wrapper_data.get("restrict_query")
         return pull_item_tweet(id, restrict_query)
     except Exception as e:
-        errorMessage = {"message": str(e)}
+        errorMessage = {"message": str(e), "script": f"error at, {pull_item_route.__name__}!"}
         return jsonify(errorMessage), 500
-    
+
+
 @tweets_aggregator_params_blueprint.route("/tweets/append-item/<id>", methods=["PUT"])
 @protect_route
 @permit_role_custom(["admin", "member"], "createdBy")
@@ -109,5 +105,5 @@ def apppend_item_route(wrapper_data):
         restrict_query = wrapper_data.get("restrict_query")
         return append_item_tweet(id, restrict_query)
     except Exception as e:
-        errorMessage = {"message": str(e)}
+        errorMessage = {"message": str(e),"script": f"error at, {apppend_item_route.__name__}!"}
         return jsonify(errorMessage), 500

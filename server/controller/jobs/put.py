@@ -44,15 +44,14 @@ from bson import ObjectId
 #         result_read_many = str(result_read_many)
 #     return jsonify(result_read_many)
 
-def put_params_job(job_id, restrict_query=None):
+def put_params_job(job_id, restrict_query={}):
     try:
         if request.method == "PUT" or request.method == "PATCH":
-            dict_query = {"_id": job_id}
+            dict_query = {"_id": job_id, **restrict_query}
             dict_update = request.json
-            
             print(">>> query to find:", dict_query)
             print(">>> query to update:", dict_update)
-
+            
             result_update_one = dao_update_one(dict_query, dict_update)
         result = result_update_one or {}
         if result and result.acknowledged:
