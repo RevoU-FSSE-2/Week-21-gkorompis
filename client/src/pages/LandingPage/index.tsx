@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 import { LoginForm, TodosBoard } from '../../containers';
 import { SlidingNavbar } from '../../components';
 
-
-
 const LandingPage = ()=>{
 const [isLogin, setIsLogin] = useState(false);
 

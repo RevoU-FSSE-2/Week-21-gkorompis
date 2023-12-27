@@ -41,14 +41,14 @@ def permit_role_custom(custom_list, restrict_query_name="unknown_field"):
                         print(">>>wrapper_data 2", wrapper_data)
                         return func(wrapper_data, *args, **kwargs)
                     except Exception as e:
-                        errorMessage = {"message": str(e)}
+                        errorMessage = {"message": str(e), "script": f"error at wrapper, {func.__name__}!"}
                         return jsonify(errorMessage), 500
                 wrapper.__name__ = func.__name__
                 return wrapper
             except Exception as e:
-                errorMessage = {"message": str(e)}
+                errorMessage = {"message": str(e), "script": f"error at permit_role, {func.__name__}!"}
                 return jsonify(errorMessage), 500
         return permit_role
     except Exception as e:
-        errorMessage = {"message": str(e)}
+        errorMessage = {"message": str(e), "script": f"error at parent, {permit_role_custom.__name__}!"}
         return jsonify(errorMessage), 500

@@ -1,10 +1,10 @@
 from flask import jsonify, request
 from model.profiles.dao.delete import dao_delete_one
 
-def delete_params_profile(profile_id):
+def delete_params_profile(profile_id, restrict_query={}):
     try:
         if request.method == "DELETE":
-            dict_query = {"_id": profile_id}
+            dict_query = {"_id": profile_id, **restrict_query}
             print(">>> query to read params in profiles:", dict_query)
             result_delete_one = dao_delete_one(dict_query)
             print(">>> dao_delete_one:", result_delete_one)

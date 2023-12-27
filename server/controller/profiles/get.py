@@ -13,7 +13,7 @@ def get_profiles(restrict_query):
         response = result_read_many or {}
         return jsonify(response)
     except Exception as e:
-        message = {"message": str(e)}
+        message = {"message": str(e), "script": f"error at, {get_profiles.__name__}!"}
         return jsonify(message)
 
 def get_one_profiles(profile_id):
@@ -28,16 +28,16 @@ def get_one_profiles(profile_id):
         message = {"message": str(e)}
         return jsonify(message)
 
-def get_params_profile(profile_id):
+def get_params_profile(profile_id, restrict_query={}):
     try:
         if request.method == "GET":
-            dict_query = {"_id": profile_id}
+            dict_query = {"_id": profile_id, **restrict_query}
             print(">>> query to read params in profiles:", dict_query)
             result_read_one = dao_read_one(dict_query)
         response = result_read_one or {}
         return jsonify(response)
     except Exception as e:
-        message = {"message": str(e)}
+        message = {"message": str(e), "script": f"error at, {get_params_profile.__name__}!"}
         return jsonify(message)
 
 def pull_item_profile(profile_id, restrict_query, field):
@@ -53,6 +53,7 @@ def pull_item_profile(profile_id, restrict_query, field):
             print(">>> parent profile", parent_profile)
             fields = parent_profile.get(field)
 
+            list_of_fields = []
             if fields:
                 #pull item from profile dao
                 list_of_fields = dao_pull_items(fields)
@@ -62,7 +63,7 @@ def pull_item_profile(profile_id, restrict_query, field):
             pulled_items = list_of_fields if list_of_fields else []
             return jsonify({"pulledItems": pulled_items})
     except Exception as e:
-        message = {"message": str(e)}
+        message = {"message": str(e), "script": f"error at, {pull_item_profile.__name__}!"}
         return jsonify(message)
 
 def pull_item_profile_tweets(profile_id, restrict_query, field):
@@ -77,7 +78,7 @@ def pull_item_profile_tweets(profile_id, restrict_query, field):
                 return jsonify({"pulledItems": []})
             print(">>> parent profile", parent_profile)
             fields = parent_profile.get(field)
-
+            list_of_fields = []
             if fields:
                 #pull item from profile dao
                 list_of_fields = dao_pull_items_tweets(fields)
@@ -87,5 +88,5 @@ def pull_item_profile_tweets(profile_id, restrict_query, field):
             pulled_items = list_of_fields if list_of_fields else []
             return jsonify({"pulledItems": pulled_items})
     except Exception as e:
-        message = {"message": str(e)}
+        message = {"message": str(e), "script": f"error at, {pull_item_profile_tweets.__name__}!"}
         return jsonify(message)
