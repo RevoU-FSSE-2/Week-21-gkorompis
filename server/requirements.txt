@@ -1,22 +1,14 @@
 bcrypt==4.1.1
 botocore==1.29.11
-click @ file:///private/var/folders/c_/qfmhj66j0tn016nkx_th4hxm0000gp/T/abs_f27dk3zwrb/croot/click_1698129816363/work
 dnspython==2.4.2
 docutils==0.16
-Flask @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_4eo947bliu/croot/flask_1671217361971/work
 Flask-Cors==4.0.0
 Flask-JWT-Extended==4.5.3
 gunicorn==21.2.0
-importlib-metadata @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_81_20mq0d8/croot/importlib-metadata_1678997090664/work
-itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
-Jinja2 @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_6adj7x0ejx/croot/jinja2_1666908137966/work
 jmespath==1.0.1
-MarkupSafe @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_d4a9444f-bd4c-4043-b47d-cede33979b0fve7bm42r/croots/recipe/markupsafe_1654597878200/work
 packaging==23.2
 PyJWT==2.8.0
 pymongo==4.6.1
 python-dotenv==1.0.0
 rsa==4.7.2
 s3transfer==0.6.0
-Werkzeug @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_fegt3z60s3/croot/werkzeug_1679489762631/work
-zipp @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_b71z79bye2/croot/zipp_1672387125902/work
