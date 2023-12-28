@@ -10,7 +10,7 @@ const Card = ({document}:CardProps)=>{
 
     const jobName = document && document.job;
     const createdBy = document && document.createdBy;
-    const status = document && document.status;
+    const jobProgress = document && document.jobProgress;
 
     return (
         <>
@@ -20,7 +20,7 @@ const Card = ({document}:CardProps)=>{
                     <p className="card-text-footer">by {createdBy}</p>
                     <div className="card-status-bar">
                         <div className="status-bar">
-                            <p className="card-status-text">{status}</p>
+                            <p className="card-status-text">{jobProgress}</p>
                         </div>
                     </div>
                 </div>

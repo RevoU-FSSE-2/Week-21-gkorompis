@@ -1,4 +1,4 @@
-.app-background {
+.app-background-profile {
     height: 100vh;
     width: 100vw;
     background-image: url("../../assets/landing-page/lp-2.jpg");
@@ -6,7 +6,7 @@
     background-position: center;
 }
 
-.landing-page{
+.profile-page{
     width: 100vw;
     height: 100vh;
     display: grid;
@@ -17,7 +17,7 @@
 
 
 
-.app-body{
+.profile-app-body{
     /* background-color: #324e4e87; */
     /* background-color: #3a9f9f; */
     width: 100%;
@@ -26,21 +26,21 @@
     grid-template-columns: 0.5fr 0.5fr;
 }
 
-.grid-col-logo{
+.profile-grid-col-logo{
     /* background-color: #FFFFFF; */
     display: flex;
     align-items: center;
-    padding-left: 70px;
+    /* padding-left: 70px; */
     padding-top:19vh;
 }
 
-.logo-page-placeholder{
+.profile-logo-page-placeholder{
     /* background-color: #3d3c42c6 ; */
     padding: 20px;
     border-radius: 5px;
 }
 
-.logo-page-title{
+.profile-logo-page-title{
     margin: 0px;
     padding: 0px;
     
@@ -67,7 +67,7 @@
     color: #FFFFFF;
 }
 
-.grid-col-form {
+.profile-grid-col-form {
     /* background-color: #FFFFFF; */
     display: flex;
     align-items: start;

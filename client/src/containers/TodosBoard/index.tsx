@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { jobsAction } from '../../actions';
 import { AnyAction } from '@reduxjs/toolkit';
 
-import { ButtonBar, Card, Infographics, ChunkTable } from '../../components';
+import { ButtonBar, Card, Infographics, ChunkTable, LoadingLinear } from '../../components';
 
 const TodosBoard = () =>{
     const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const TodosBoard = () =>{
                         isCardDeck ?
                             <div className="card-decks">
                                 {
-                                    jobsLoading ? <p>loading...</p> :
+                                    jobsLoading ? <LoadingLinear message={"fetching"}/>:
                                     jobsError ? <p>error - {jobsErrMessage}</p> : 
                                     jobsPayload.map((doc:any, key:any)=>{
                                         return <Card document={doc} key={key}/>
@@ -46,7 +46,7 @@ const TodosBoard = () =>{
                             </div> :
                             <div className="table-decks">
                                 {
-                                    jobsLoading ? <p>loading...</p> :
+                                    jobsLoading ? <LoadingLinear message={"fetching"}/> :
                                     jobsError ? <p>error - {jobsErrMessage}</p> : 
                                     <ChunkTable data={jobsPayload}/>
                                 }

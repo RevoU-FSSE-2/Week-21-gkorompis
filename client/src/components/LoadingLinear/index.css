@@ -1,0 +1,18 @@
+.loading-linear-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* background-color: blue; */
+}
+.loading-component{
+    /* height: 400px; */
+    width: 250px;
+    /* background-color: black; */
+}
+.loading-text{
+    color: #fff;
+    letter-spacing: 4px;
+}

@@ -1,0 +1,115 @@
+.tweets-board {
+    background-color: rgba(43, 43, 47, 0.428);
+    height: 100%;
+    width: 93%;
+    
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    overflow: auto;
+}
+
+.infographics {
+    /* background-color: rgba(0, 255, 255, 0.47); */
+    height: 90px;
+    width: 100%;
+}
+.button-bar {
+    /* background-color: rgb(24, 81, 81); */
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    padding-bottom: 10px;
+
+}
+.tweets-placeholder{
+    /* background-color: rgba(0, 255, 255, 0.207); */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+.card-decks{
+    width: 96%;
+    /* background-color: blue; */
+    max-height: 65vh;;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    column-gap: 0px;
+    row-gap: 15px;
+    overflow: auto;
+    padding: 8px;
+}
+.table-decks {
+    width: 90%;
+    max-height: 65vh;
+    overflow: auto;
+    padding: 8px;
+}
+
+.tweets-title-text{
+    color: #ffffffd0;
+    letter-spacing: 4px;
+}
+
+
+.tweets-section {
+    /* border: 1px solid #ffffff6f; */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 92%;
+}
+.section-profile {
+    height: 10vh;
+    padding: 13px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-tweets{
+    /* border: 1px solid #ffffff6f; */
+    height: 60vh;
+    padding: 13px;
+    overflow: auto;
+}
+.profile-box{
+    height: 90px;
+    width: 90px;
+    /* background-color: #ffffff52; */
+    border: 1px solid #ffffff52;
+    border-radius: 5px;
+    margin-inline: 13px;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.profile-box:hover{
+    background-color: #ffffff89;
+}
+.profile-box:active {
+    background-color: #ffffffdb;
+}
+.box-text-big{
+    font-size: 30px;
+    padding: 0px;
+    margin: 0px;
+    color: #ffffffd4;
+    margin-bottom: 5px;
+}
+.box-text-small{
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+    color: #ffffffd4;
+}
