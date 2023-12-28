@@ -1,27 +1,41 @@
 import './index.css'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { RegisterForm, ProfileBoard } from '../../containers';
 import { SlidingNavbar } from '../../components';
+import { useNavigate } from 'react-router-dom';
+import { cookies } from '../../utils/global';
 
 
 
-const LandingPage = ()=>{
-const [isLogin, setIsLogin] = useState(true);
+const ProfilePage = ()=>{
+    const [isLogin, setIsLogin] = useState(true);
+    const navigate = useNavigate();
+    const cookiesAll = cookies.getAll();
+    const {accessToken} = cookiesAll;
 
+
+    useEffect(()=>{
+        if(accessToken){
+            setIsLogin(true)
+        } else {
+            setIsLogin(false)
+            navigate('/')
+        }
+    }, [])
     return (
         <>
-        <div className="app-background">
-            <div className="landing-page">
+        <div className="app-background-profile">
+            <div className="profile-page">
                 <SlidingNavbar isLogin={isLogin} setIsLogin={setIsLogin}/>
-                <div className="app-body">
-                    <div className="grid-col-logo">
-                        <div className="logo-page-placeholder">
-                            <h1 className="logo-page-title">manage todos, share todos.</h1>
+                <div className="profile-app-body">
+                    <div className="profile-grid-col-logo">
+                        <div className="profile-logo-page-placeholder">
+                            <h1 className="profile-logo-page-title">manage todos, share todos.</h1>
                             {/* <p className="logo-page-slur">manage your todos, share your todos.</p> */}
                         </div>
                     </div>
-                    <div className="grid-col-form">
+                    <div className="profile-grid-col-form">
                         {
                             isLogin ?
                                 <ProfileBoard/> : <p>restricted access</p>
@@ -35,5 +49,5 @@ const [isLogin, setIsLogin] = useState(true);
     )
 };
 
-export default LandingPage
+export default ProfilePage
 

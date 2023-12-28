@@ -13,6 +13,7 @@ import { useState } from "react";
 // import { APP_TITLE } from "../../utils/global";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { tokensAction } from "../../actions";
 
 interface ModalFormInitialValues {
     username: string,
@@ -27,6 +28,7 @@ interface ModalLoginFormProps {
 const LoginForm = ({cb}:ModalLoginFormProps) =>{
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const [openSnackBar,setOpenSnackBar] = useState(false)
     const [errorMessage, setErrorMessage] = useState(false)
@@ -43,13 +45,29 @@ const LoginForm = ({cb}:ModalLoginFormProps) =>{
 
     const onSubmitFormik = async (values:any) => {
         try {
-            console.log("form submitted ", {values});
+            console.log("form submitted #2 ", {values});
+            dispatch({type: "RELOADS_LOADING"})
+            const responseLogin = await axios.post(`${BASE_URL}/auth/login/`, values);
+            console.log({responseLogin})
+            const data = responseLogin && responseLogin.data || "";
+            const tokens = {
+                access: {
+                    token: data
+                },
+                refresh: {
+                    token: data
+                }
+            }
+            console.log({tokens})
+            dispatch({type: "RELOADS_SUCCESS"})
+            dispatch(tokensAction({reduxState: {tokens}}) as any)
             cb(true)
         } catch (error:any ){ 
+            dispatch({type: "RELOADS_SUCCESS"})
+            cb(false)
             const {message} = error;
             console.log("form error", {error, message});
         }
-
     }
 
     const validationSchema = {
@@ -86,7 +104,7 @@ const LoginForm = ({cb}:ModalLoginFormProps) =>{
 
     return (    
         <>
-            <div className="app-modal-form div-center-xy-column bg-blur">
+            <div className="app-modal-form div-center-xy-column">
                 <h5 className="logo-page-title-small">todos</h5>
                 <CustomizedForm<ModalFormInitialValues> 
                     fields={loginFormFields} 

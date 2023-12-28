@@ -1,0 +1,38 @@
+.tweet-card{
+    height: 80px;
+    width: 50%;
+    background-color: rgba(215, 217, 219, 0.777);
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 8px;
+    display: flex;;
+    flex-direction: column;
+    justify-content: center;
+}
+.tweet-texts{
+    padding: 0px;
+    margin: 0px;
+}
+.tweet-text-user{
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+.tweet-text-user:hover{
+    color: rgba(11, 109, 90, 0.897);
+    cursor: pointer;
+}
+.tweet-text-tweets{
+    margin-bottom: 9px;
+}
+.tweet-card-footers{
+    display: flex;
+}
+.tweet-text-footers{
+    font-size: 11px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+.tweet-text-footers:hover{
+    text-decoration: underline;
+    color: rgba(11, 109, 90, 0.897);
+}

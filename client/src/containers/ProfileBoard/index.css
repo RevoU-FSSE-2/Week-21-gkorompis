@@ -1,7 +1,8 @@
 .profile-board {
     background-color: rgba(43, 43, 47, 0.428);
     height: 100%;
-    width: 93%;
+    width:100%;
+    /* padding-inline: 10px; */
     
     border-radius: 5px;
 
@@ -31,7 +32,8 @@
     /* background-color: rgba(0, 255, 255, 0.207); */
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     overflow: auto;
 }
 .card-decks{
@@ -45,11 +47,13 @@
     overflow: auto;
     padding: 8px;
 }
-.table-decks {
-    width: 90%;
+.table-decks-profile {
+    width: 100%;
+    /* background-color: bisque; */
     max-height: 65vh;
     overflow: auto;
-    padding: 8px;
+    max-width: 47vw;
+    /* padding: 8px; */
 }
 
 .profile-title-text{

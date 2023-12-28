@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { profileAction } from '../../actions';
 import { AnyAction } from '@reduxjs/toolkit';
 
-import { ButtonBar, Card, Infographics, ChunkTable } from '../../components';
+import { ButtonBar, Card, Infographics, ChunkTable, LoadingLinear } from '../../components';
 
 const TodosBoard = () =>{
     const dispatch = useDispatch();
@@ -35,9 +35,9 @@ const TodosBoard = () =>{
                 <h3 className="profile-title-text">Profile</h3>
                 <div className='profile-placeholder'>
                     {
-                        <div className="table-decks">
+                        <div className="table-decks-profile">
                             {
-                                profileLoading ? <p>loading...</p> :
+                                profileLoading ? <LoadingLinear message={"fetching"}/> :
                                 profileError ? <p>error - {profileErrMessage}</p> : 
                                 // <p>profile</p>
                                 <ChunkTable data={profilePayload}/> 
