@@ -1,5 +1,3 @@
-aws-wsgi==0.2.7
-awscli==1.27.11
 bcrypt==4.1.1
 botocore==1.29.11
 click @ file:///private/var/folders/c_/qfmhj66j0tn016nkx_th4hxm0000gp/T/abs_f27dk3zwrb/croot/click_1698129816363/work
