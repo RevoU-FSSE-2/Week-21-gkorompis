@@ -20,6 +20,11 @@
     font-size: 16px;
     padding: 0px;
     margin: 0px;
+    cursor: pointer;
+}
+.profile-card-header-text:hover{
+    text-decoration: underline;
+    color: rgba(11, 109, 90, 0.897);
 }
 
 .profile-card-body {

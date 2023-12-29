@@ -49,8 +49,8 @@ const TodosBoard = () =>{
     }
     useEffect(()=>{
         dispatch(tweetsAction("") as unknown as AnyAction)
-        dispatch(followingAction("") as unknown as AnyAction)
-        dispatch(followersAction("") as unknown as AnyAction)
+        // dispatch(followingAction("") as unknown as AnyAction)
+        // dispatch(followersAction("") as unknown as AnyAction)
     }, [dispatch])
     return (
         <>
@@ -144,7 +144,7 @@ const FollowingSection =({states}:any)=>{
             {
                 followingLoading ? <LoadingLinear message={"fetching"}/> : 
                 followingError ? <h1>error</h1> :
-                followingLoading[0] ? 
+                followingPayload[0] ? 
                 followingPayload.map((x:any, key:any)=>{
                     return <ProfileCard data={x}/>
                 }) : <p className='box-text-small'>0 following</p>

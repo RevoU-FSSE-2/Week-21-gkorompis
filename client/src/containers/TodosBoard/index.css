@@ -43,9 +43,10 @@
     /* background-color: blue; */
     max-height: 80vh !important;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px,300px)) !important;
-    column-gap: 0px;
-    row-gap: 15px!important;
+    grid-template-columns: repeat(auto-fit, minmax(150px,200px)) !important;
+    grid-auto-rows: 200px;
+    column-gap: 20px !important;
+    row-gap: 40px !important;
     overflow: auto;
     padding: 8px;
 }

@@ -1,7 +1,7 @@
 .card-div {
     /* background-color: aliceblue; */
-    padding: 9px;
-    height: 150px;
+    /* padding: 10px; */
+    height: 100%;
 }
 .card {
     background-color: rgba(32, 35, 35, 0.791);

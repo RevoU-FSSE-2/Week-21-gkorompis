@@ -56,7 +56,7 @@ def get_params_route(wrapper_data):
 
 @jobs_params_blueprint.route("/", methods=["PUT"])
 @protect_route
-@permit_role_custom(["admin","member"])
+@permit_role_custom(["admin","member"], "createdBy")
 @allow_modify_fields(["job", "jobProgress"])
 def put_params_route(wrapper_data):
     try:

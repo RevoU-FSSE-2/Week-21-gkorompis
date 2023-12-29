@@ -68,9 +68,10 @@ const followingAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
         console.log(">>>followingaction")
         dispatch({type: actionTypes.loading});
         const allCookies = cookies.getAll();
-        const {accessToken} = allCookies;
+        const {accessToken, sessionId} = allCookies;
         const config = {
-          headers: {Authorization: `Bearer ${accessToken}`}
+          headers: {Authorization: `Bearer ${accessToken}`},
+          params: {username: sessionId}
         }
         const responseFetchSelfProfile = await axios.get(`${BASE_URL}/profiles/`, config)
      

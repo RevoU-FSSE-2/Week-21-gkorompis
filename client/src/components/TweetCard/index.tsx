@@ -45,12 +45,20 @@ const FollowingModal=({states, handlers}:any)=>{
             const fetchedProfile = data[0] ? data[0] : {};
             const fetchedProfileId = fetchedProfile && fetchedProfile._id || "";
             console.log(">>>fetched profile id", {fetchedProfileId, fetchedProfile, responseFetched, createdBy})
-            // const responsePost = await axios.put(`${BASE_URL}/profile/append-item/following/${profileId}`,{profileId: _id}, config);
-            // console.log(">>> followingModal", {responsePost});
+            console.log(">>>put append item following", {profileId, fetchedProfileId})
+            const responsePost = await axios.put(`${BASE_URL}/profile/append-item/following/${profileId}`,{profileId: fetchedProfileId}, config);
+            console.log(">>> followingModal", {responsePost});
 
             setIsFollowingModal(false);
-        } catch(err){
-            console.log(">>>error handleFollowUser", err)
+        } catch(err:any){
+            console.log(">>>error handleFollowUser", err);
+            let customMessage = "";
+            const response = err && err.response;
+            const data = response && response.data;
+            customMessage= data && data.message;
+
+            alert(customMessage || err && err.message || "unknown")
+            setIsFollowingModal(false);
         }
     }
 
