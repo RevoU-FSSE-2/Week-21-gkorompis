@@ -16,6 +16,7 @@ def get_route(wrapper_data):
     dict_query = request.args.to_dict()
     profile_id = dict_query.get('_id')
     restrict_query = wrapper_data.get('restrict_query')
+    restrict_query = restrict_query if restrict_query else {}
     if profile_id:
         return get_one_profiles(profile_id) #one query
     else:
