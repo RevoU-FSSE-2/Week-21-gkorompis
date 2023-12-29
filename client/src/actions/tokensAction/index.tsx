@@ -28,13 +28,31 @@ const tokenAction = ({reduxState}:any)=> async(dispatch:Dispatch) =>{
         cookies.set('sessionId', sessionId, {path: '/'})
 
         // axios.defaults.headers.common = {'Authorization': `bearer ${accessToken}`}
-        // const config = {
-        //   headers: {Authorization: `Bearer ${accessToken}`}
-        // }
+        const config = {
+          headers: {Authorization: `Bearer ${accessToken}`},
+          params: {username: sessionId}
+        }
 
-        // const responseGetProduct = await axios.get(`${BASE_URL}/users/${sessionId}`, config)
-        // const responseGetOwnerStore = await axios.get(`${BASE_URL}/stores?id_user=${sessionId}`, config)
-
+        const fetchedProfile = await axios.get(`${BASE_URL}/profiles/`, config);
+        const data = fetchedProfile && fetchedProfile.data;
+        let keys = [] as any
+        if(data){
+            keys = Object.keys(data);
+        }
+        const profile = keys[0] ? data[0] : {};
+        const profileId = profile["_id"];
+        console.log(">>>fetchedProfile",{profile});
+        if(!profileId){
+            console.log(">>registering profile")
+            const profile = {username: sessionId}
+            const configProfile = {
+                headers: {Authorization: `Bearer ${accessToken}`}
+            }
+            const fetchedProfile = await axios.post(`${BASE_URL}/profiles/`, profile, configProfile);
+            console.log(">>>profile is registered", {fetchedProfile});
+            cookies.set('profileId', profileId, {path: '/'})
+        }
+        cookies.set('profileId', profileId, {path: '/'})
       
 
         const payload = {tokens}

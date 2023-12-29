@@ -7,6 +7,7 @@ import { AnyAction } from '@reduxjs/toolkit';
 
 import { ButtonBar, Card, Infographics, ChunkTable, TweetCard, ProfileCard, LoadingLinear } from '../../components';
 import { cookies } from '../../utils/global';
+import {NewTweetForm} from '..'
 
 const TodosBoard = () =>{
     const cookiesAll = cookies.getAll();
@@ -15,6 +16,8 @@ const TodosBoard = () =>{
 
     const [isCardDeck, setIsCardDeck] = useState(true);
     const [switched, setSwitched] = useState("");
+    const [isNewTweetForm, setIsNewTweetForm] = useState(false);
+    
     
 
     const tweetState = useSelector((state:any)=>state.tweets);
@@ -37,9 +40,12 @@ const TodosBoard = () =>{
         } else {
             dispatch(tweetsAction("") as unknown as AnyAction)
         }
-        
+    }
 
-
+    const handleNewTweet = () =>{
+        console.log(">>>handle new tweet", isNewTweetForm)
+        setIsNewTweetForm(true)
+        console.log(">>>handle new tweet", isNewTweetForm)
     }
     useEffect(()=>{
         dispatch(tweetsAction("") as unknown as AnyAction)
@@ -73,22 +79,34 @@ const TodosBoard = () =>{
                             <p className="box-text-small">followers</p>
                         </div>
                     </div>
+                    <p className="add-new-tweet" onClick={()=>handleNewTweet()}>
+                            new tweet
+                    </p>
                     <div className="tweets-section section-tweets">
+                        
                         {
                             switched ==  "global" ?
                             <TweetSection states ={tweetState} /> : 
                             switched == "self" ?
-                            <TweetSection states ={tweetState} /> :
+                            <TweetSection states ={tweetState}/> :
                             switched == "following" ?
                             <FollowingSection states ={followingState} /> :
                             switched == "followers" ?
                             <FollowersSection states ={followersState} /> :
-                            <TweetSection states={tweetState} /> 
+                            <TweetSection states={tweetState}/> 
 
                         }
                     </div>
                 </div>
             </div>
+            {
+                isNewTweetForm ? <div className="bg-blur tweet-modal-center">
+                    <NewTweetForm 
+                        cb={()=>setIsNewTweetForm(false)}
+                    />
+                    </div> : null
+            }
+            
         </>
     )
 };
@@ -107,7 +125,7 @@ const TweetSection =({states}:any)=>{
                 tweetsLoading ? <LoadingLinear message={"fetching"}/>  : 
                 tweetsError ? <h1>error</h1> :
                 tweetsPayload[0] ?
-                tweetsPayload.map((x:any, key:any)=>{
+                tweetsPayload.reverse().map((x:any, key:any)=>{
                     return <TweetCard data={x}/>
                 }) : <p className='box-text-small'>0 tweets</p>
             }
@@ -126,9 +144,10 @@ const FollowingSection =({states}:any)=>{
             {
                 followingLoading ? <LoadingLinear message={"fetching"}/> : 
                 followingError ? <h1>error</h1> :
+                followingLoading[0] ? 
                 followingPayload.map((x:any, key:any)=>{
                     return <ProfileCard data={x}/>
-                })
+                }) : <p className='box-text-small'>0 following</p>
             }
 
         </>
@@ -155,3 +174,4 @@ const FollowersSection =({states}:any)=>{
         </>
     )
 }
+

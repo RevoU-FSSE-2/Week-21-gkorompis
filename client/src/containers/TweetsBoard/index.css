@@ -113,3 +113,29 @@
     margin: 0px;
     color: #ffffffd4;
 }
+
+.add-new-tweet{
+    padding-block: 8px;
+    padding-inline: 11px;
+    width: 90px;
+    background-color: rgba(237, 240, 244, 0.828);
+    margin-bottom: 20px;
+    font-size: 13px;
+    text-align: center;
+    align-self: start;
+    margin-left: 33px;
+    cursor: pointer;
+}
+.add-new-tweet:hover{
+    background-color: rgba(167, 168, 169, 0.723);
+}
+.add-new-tweet:active {
+    background-color: rgba(231, 232, 232, 0.723);
+}
+
+.tweet-modal-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

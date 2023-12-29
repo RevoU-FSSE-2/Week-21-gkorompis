@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 
 import { RegisterForm, TodosBoard } from '../../containers';
 import { SlidingNavbar } from '../../components';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const LandingPage = ()=>{
 const [isLogin, setIsLogin] = useState(false);
-
+    const navigate = useNavigate()
     return (
         <>
         <div className="app-background">
@@ -26,7 +27,7 @@ const [isLogin, setIsLogin] = useState(false);
                             isLogin ?
                                 <TodosBoard/>    :
                                     <div className="form-placeholder-register">
-                                        <RegisterForm/>   
+                                        <RegisterForm cb={()=>navigate('/')}/>   
                                     </div>
                                 
                         }

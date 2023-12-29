@@ -36,3 +36,31 @@
     text-decoration: underline;
     color: rgba(11, 109, 90, 0.897);
 }
+
+.following-modal-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.following-modal-button-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: end;
+    padding: 5px;
+    margin-top: 10px;
+}
+.following-modal-button{
+    margin-right: 5px;
+    outline: 0px;
+    border: 0px;
+    background-color: antiquewhite;
+    padding-inline: 30px;
+    padding-block: 15px;
+    cursor: pointer;
+}
+.following-modal-button:hover {
+    background-color: rgb(64, 58, 50);
+    color: antiquewhite;
+}

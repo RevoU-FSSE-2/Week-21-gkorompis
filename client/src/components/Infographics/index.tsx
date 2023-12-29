@@ -11,8 +11,8 @@ const Infographics = ({data}: InfographicsProps) =>{
         return status.toLowerCase() == 'done';
     })
 
-    const totalCount = data && data.length;
-    const doneCount = filteredDone && filteredDone.length;
+    const totalCount = data && data.length || 1;
+    const doneCount = filteredDone && filteredDone.length || 0;
     const percentageDone =  ((+doneCount / +totalCount) * 100).toFixed(1);
     // const percentageDone = 0 
 

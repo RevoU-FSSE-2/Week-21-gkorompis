@@ -62,10 +62,10 @@ const jobsAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
           headers: {Authorization: `Bearer ${accessToken}`}
         }
         const responseFetch = await axios.get(`${BASE_URL}/jobs/`, config)
-        console.log({responseFetch});
+        console.log("responseFetch jobs", {responseFetch});
         const data = responseFetch && responseFetch.data;
-
-        const payload = data || []
+        const keys = Object.keys(data);
+        const payload = keys[0] ? data : [];
         dispatch({type: actionTypes.success, payload})
     } catch(error:any) {
         const {message} = error;

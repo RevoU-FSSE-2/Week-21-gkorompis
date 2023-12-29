@@ -24,3 +24,8 @@
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+.bar-button-far-right {
+    border-radius: 3px;
+    /* margin-right: 0px !important; */
+    margin-left: 20px;
+}

@@ -6,11 +6,13 @@ import { jobsAction } from '../../actions';
 import { AnyAction } from '@reduxjs/toolkit';
 
 import { ButtonBar, Card, Infographics, ChunkTable, LoadingLinear } from '../../components';
+import {NewJobForm} from '..'
 
 const TodosBoard = () =>{
     const dispatch = useDispatch();
 
     const [isCardDeck, setIsCardDeck] = useState(true);
+    const [isNewJobForm, setIsNewJobForm] = useState(false);
 
     const jobsState = useSelector((state:any)=>state.jobs);
     const jobsPayload = jobsState && jobsState.payload || [];
@@ -30,7 +32,7 @@ const TodosBoard = () =>{
                     <Infographics data={jobsPayload}/>
                 </div>
                 <div className='button-bar'>
-                    <ButtonBar cb={setIsCardDeck}/>
+                    <ButtonBar cb={setIsCardDeck} handlers={{setIsNewJobForm}}/>
                 </div>
                 <div className='jobs-placeholder'>
                     {
@@ -57,8 +59,17 @@ const TodosBoard = () =>{
                     
                 </div>
             </div>
+            {
+                isNewJobForm ? <div className="bg-blur modal-center">
+                    <NewJobForm 
+                        cb={()=>setIsNewJobForm(false)}
+                    />
+                    </div> : null
+            }
         </>
     )
 };
+
+
 
 export default TodosBoard;

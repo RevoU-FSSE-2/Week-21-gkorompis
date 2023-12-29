@@ -1,4 +1,4 @@
-import { CustomizedForm, SnackBarMui } from "../../components";
+import { CustomizedForm, LoadingLinear, SnackBarMui } from "../../components";
 import { BASE_URL } from "../../utils/global";
 import * as Yup from 'yup'
 import axios from 'axios';
@@ -27,19 +27,20 @@ interface ModalRegisterFormProps {
 const RegisterForm = ({cb}:ModalRegisterFormProps) =>{
 
     const navigate = useNavigate()
+    const [isFormLoading, setIsFormLoading] = useState(false)
 
     const [openSnackBar,setOpenSnackBar] = useState(false)
     const [errorMessage, setErrorMessage] = useState(false)
     
     const loginFormFields = [
-        {name: "name", label: "name", type: "text"},
+        {name: "fullname", label: "fullname", type: "text"},
         {name: "email", label: "email", type: "email"},
         {name: "username", label: "username", type: "text"},
         {name: "password", label: "password", type: "password"}
     ]
 
     const loginFormInitialValues = {
-        name: "",
+        fullname: "",
         email: "",
         username: "",
         password: "",
@@ -50,16 +51,21 @@ const RegisterForm = ({cb}:ModalRegisterFormProps) =>{
     const onSubmitFormik = async (values:any) => {
         try {
             console.log("form submitted ", {values});
-            cb(true)
+            setIsFormLoading(true)
+            const responsePost = await axios.post(`${BASE_URL}/users/`, values);
+            setIsFormLoading(false)
+            console.log(">>>responsePost", {responsePost})
+            cb()
         } catch (error:any ){ 
             const {message} = error;
+            setIsFormLoading(false)
             console.log("form error", {error, message});
         }
 
     }
 
     const validationSchema = {
-        name: Yup.string().required("this field is required"),
+        fullname: Yup.string().required("this field is required"),
         email: Yup.string().email().required("this field is required"),
         username: Yup.string().required("this field is required"),
         password: Yup.string().required("this field is required")
@@ -96,7 +102,9 @@ const RegisterForm = ({cb}:ModalRegisterFormProps) =>{
         <>
             <div className="app-modal-form div-center-xy-column bg-blur">
                 <h5 className="logo-page-title-small">todos</h5>
-                <CustomizedForm<ModalFormInitialValues> 
+                {
+                    isFormLoading ? <LoadingLinear message="processing"/> :
+                    <CustomizedForm<ModalFormInitialValues> 
                     fields={loginFormFields} 
                     initialValues={loginFormInitialValues} 
                     onSubmitFormik={onSubmitFormik} 
@@ -106,10 +114,13 @@ const RegisterForm = ({cb}:ModalRegisterFormProps) =>{
                     isCancelButton={true}   
                     cb={navigateBack}
                 />
+                }
+                
             </div>
             <div>
                 <SnackBarMui openSnackBar={openSnackBar} setOpenSnackBar={setOpenSnackBar} message={errorMessage} isCancelButton={true} />
             </div>
+
         </>
         
     )

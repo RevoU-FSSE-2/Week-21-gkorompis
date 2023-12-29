@@ -3,12 +3,11 @@
     src: url('../../assets/fonts/syn-nova/SYNNova-Bold.otf') format('opentype');
 } */
 
-.app-modal-form {
+.app-modalform {
     /* background-color: aquamarine; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     /* height: 100vh; */
 }
 
@@ -40,3 +39,7 @@
     background-color: black;
     height: 100%
 } */
+
+.new-job-form-div{
+    width: 390px;
+}
