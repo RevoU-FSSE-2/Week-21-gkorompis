@@ -13,3 +13,5 @@ my_deployment_package
 server-lambda
 my_deployment_package.zip
 deploy.zip
+# Local Netlify folder
+.netlify

@@ -1,5 +1,5 @@
-# TODOS APP 
-simple crud app project week 14.
+# [TODOS APP](https://todos-tweet-app.netlify.app)
+Simple Crud App using Flask
 
 <img width="1436" alt="Screen Shot 2023-12-06 at 11 32 25" src="https://github.com/RevoU-FSSE-2/week-14-gkorompis-00/assets/113084592/dc9d77ab-685b-4452-9f35-3b71215594ae">
 
@@ -24,6 +24,12 @@ App Layouts:
 
 <img width="1421" alt="Screen Shot 2023-12-06 at 11 33 07" src="https://github.com/RevoU-FSSE-2/week-14-gkorompis-00/assets/113084592/ad5aba22-e32a-46a6-8652-ebe274622266">
 
+### Tweet Page
+<img width="1440" alt="Screen Shot 2023-12-30 at 11 56 04" src="https://github.com/RevoU-FSSE-2/week-22-gkorompis/assets/52250424/f6dbf2fb-1866-4a1e-aced-8d75eb1af3d9">
+<img width="1440" alt="Screen Shot 2023-12-30 at 11 56 38" src="https://github.com/RevoU-FSSE-2/week-22-gkorompis/assets/52250424/e6a2ee3d-b9e4-424f-b95a-9e25d7dfcdeb">
+<img width="1440" alt="Screen Shot 2023-12-30 at 11 56 57" src="https://github.com/RevoU-FSSE-2/week-22-gkorompis/assets/52250424/c3e1e601-01da-4906-97b8-09c650c75124">
+
+
 ## 2. Contents
 
 1. [Project overview](#1-project-overview)
@@ -44,3 +50,7 @@ npm --test
 ```
 
 <img width="1109" alt="Screen Shot 2023-12-06 at 11 56 22" src="https://github.com/RevoU-FSSE-2/week-14-gkorompis-00/assets/113084592/526b5449-bef6-4ecc-ab83-f5771604c4d7">
+
+## 4. Deployment
+- Backend deployed on render
+- Frontend deployed on netlify
