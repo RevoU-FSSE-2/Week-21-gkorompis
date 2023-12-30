@@ -6,10 +6,11 @@ import { cookies } from '../../utils/global';
 const SlidingNavBar = ({isLogin, setIsLogin}:any) =>{
     const navigate = useNavigate()
     const logoutHandler = () =>{
-        console.log(">>>logingout")
+        // console.log(">>>logingout")
         cookies.remove("refreshToken", {path: "/"});
         cookies.remove("accessToken", {path: "/"});
         cookies.remove("sessionId", {path: "/"});
+        cookies.remove("profileId", {path: "/"});
         navigate("/")
         setIsLogin(false)
     };

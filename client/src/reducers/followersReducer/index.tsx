@@ -1,9 +1,9 @@
 import {Reducer} from 'redux';
 
 const actionTypes = {
-    loading: 'FOLLOWING_LOADING',
-    success: 'FOLLOWING_SUCCESS',
-    error: 'FOLLOWING_ERROR'
+    loading: 'FOLLOWERS_LOADING',
+    success: 'FOLLOWERS_SUCCESS',
+    error: 'FOLLOWERS_ERROR'
 }
 
 const stateDefault = {

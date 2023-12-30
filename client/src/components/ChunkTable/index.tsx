@@ -9,7 +9,7 @@ const openLinkHandler = (link:any) =>{
 }
 
 const ChunkTable=({data}:any)=>{
-    console.log("table rendered again")
+    // console.log("table rendered again")
     const columns_name = Object.keys(data[0]);
     const column_url = "attachmentUrl"
     return (

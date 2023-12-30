@@ -54,7 +54,7 @@ const dummyProfile= [
 
 const tweetsAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
     try {
-        console.log(">>>tweetsaction")
+        // console.log(">>>tweetsaction")
         dispatch({type: actionTypes.loading});
         const {query} = reduxState;
         const queryTag = query || "/"
@@ -64,13 +64,14 @@ const tweetsAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
         const config = {
           headers: {Authorization: `Bearer ${accessToken}`}
         }
-        const responseFetch = await axios.get(`${BASE_URL}/tweets${queryTag}`, config)
-        console.log({responseFetch});
+        // console.log(">>> fetching")
+        const responseFetch = await axios.get(`${BASE_URL}/tweets/`, config)
+        // console.log({responseFetch});
         const data = responseFetch && responseFetch.data;
         const keys = Object.keys(data);
-    console.log('>>>payload tweets', keys)
+    // console.log('>>>payload tweets', keys)
         const payload = keys[0] ? data : [];
-        console.log('>>>payload tweets', payload)
+        // console.log('>>>payload tweets', payload)
         dispatch({type: actionTypes.success, payload})
     } catch(error:any) {
         const {message} = error;

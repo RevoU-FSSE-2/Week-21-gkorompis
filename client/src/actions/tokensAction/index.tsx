@@ -11,16 +11,16 @@ const actionTypes = {
 
 const tokenAction = ({reduxState}:any)=> async(dispatch:Dispatch) =>{
     try {
-        console.log(">>>tokenAction")
+        // console.log(">>>tokenAction")
         dispatch({type: actionTypes.loading});
-        console.log({reduxState})
+        // console.log({reduxState})
         const {tokens} = reduxState;
         
         const {access, refresh} = tokens || {};
         const accessToken = access && access.token;
         const refreshToken = refresh && refresh.token;
         const decoded = jwtDecode(accessToken);
-        console.log({decoded});
+        // console.log({decoded});
         const sessionId = decoded && decoded.sub || ""
         
         cookies.set('accessToken', accessToken, {path: '/'})
@@ -41,7 +41,7 @@ const tokenAction = ({reduxState}:any)=> async(dispatch:Dispatch) =>{
         }
         const profile = keys[0] ? data[0] : {};
         const profileId = profile["_id"];
-        console.log(">>>fetchedProfile",{profile});
+        // console.log(">>>fetchedProfile",{profile});
         if(!profileId){
             console.log(">>registering profile")
             const profile = {username: sessionId}
@@ -49,7 +49,7 @@ const tokenAction = ({reduxState}:any)=> async(dispatch:Dispatch) =>{
                 headers: {Authorization: `Bearer ${accessToken}`}
             }
             const fetchedProfile = await axios.post(`${BASE_URL}/profiles/`, profile, configProfile);
-            console.log(">>>profile is registered", {fetchedProfile});
+            // console.log(">>>profile is registered", {fetchedProfile});
             cookies.set('profileId', profileId, {path: '/'})
         }
         cookies.set('profileId', profileId, {path: '/'})

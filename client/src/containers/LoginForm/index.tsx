@@ -45,10 +45,10 @@ const LoginForm = ({cb}:ModalLoginFormProps) =>{
 
     const onSubmitFormik = async (values:any) => {
         try {
-            console.log("form submitted #2 ", {values});
+            // console.log("form submitted #2 ", {values});
             dispatch({type: "RELOADS_LOADING"})
             const responseLogin = await axios.post(`${BASE_URL}/auth/login/`, values);
-            console.log({responseLogin})
+            // console.log({responseLogin})
             const data = responseLogin && responseLogin.data || "";
             const tokens = {
                 access: {
@@ -58,7 +58,7 @@ const LoginForm = ({cb}:ModalLoginFormProps) =>{
                     token: data
                 }
             }
-            console.log({tokens})
+            // console.log({tokens})
             dispatch({type: "RELOADS_SUCCESS"})
             dispatch(tokensAction({reduxState: {tokens}}) as any)
             cb(true)

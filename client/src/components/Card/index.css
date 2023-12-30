@@ -47,3 +47,10 @@
     letter-spacing: 5px;
 }
 
+.card-text-delete{
+    font-size: 11px;
+    cursor: pointer;
+}
+.card-text-delete:hover{
+    color: rgba(58, 162, 136, 0.83)
+}

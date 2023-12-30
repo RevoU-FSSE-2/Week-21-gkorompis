@@ -2,14 +2,17 @@ import { useState } from "react";
 import "./index.css"
 import { BASE_URL, cookies } from "../../utils/global";
 import axios from "axios";
+import { reloadsAction, tweetsAction } from "../../actions";
+import { useDispatch } from "react-redux";
 
 
-const TweetCard = ({data, handlers}:any) =>{
+const TweetCard = ({data, handlersy}:any) =>{
     const {_id, createdBy, tweet} = data;
+    
     const [isFollowingModal, setIsFollowingModal] = useState(false);
     return(
         <>
-            <div className="tweet-card">
+            <div className="tweet-card" >
                <p className="tweet-texts tweet-text-user">@{createdBy}</p>
                <p className="tweet-texts tweet-text-tweets">"{tweet}"</p>
                <div className="tweet-card-footers">
@@ -29,6 +32,7 @@ const FollowingModal=({states, handlers}:any)=>{
     const {setIsFollowingModal} = handlers;
     const cookiesAll = cookies.getAll();
     const {profileId} = cookiesAll || "";
+    const dispatch = useDispatch()
     const handleFollowUser = async ()=>{
         try{
             const allCookies = cookies.getAll();
@@ -44,11 +48,12 @@ const FollowingModal=({states, handlers}:any)=>{
             const data = responseFetched && responseFetched.data || [];
             const fetchedProfile = data[0] ? data[0] : {};
             const fetchedProfileId = fetchedProfile && fetchedProfile._id || "";
-            console.log(">>>fetched profile id", {fetchedProfileId, fetchedProfile, responseFetched, createdBy})
-            console.log(">>>put append item following", {profileId, fetchedProfileId})
+            // console.log(">>>fetched profile id", {fetchedProfileId, fetchedProfile, responseFetched, createdBy})
+            // console.log(">>>put append item following", {profileId, fetchedProfileId})
             const responsePost = await axios.put(`${BASE_URL}/profile/append-item/following/${profileId}`,{profileId: fetchedProfileId}, config);
-            console.log(">>> followingModal", {responsePost});
-
+            // console.log(">>> followingModal", {responsePost});
+            dispatch(tweetsAction("") as any)
+            dispatch(reloadsAction("") as any)
             setIsFollowingModal(false);
         } catch(err:any){
             console.log(">>>error handleFollowUser", err);

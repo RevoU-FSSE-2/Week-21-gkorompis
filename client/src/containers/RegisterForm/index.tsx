@@ -50,11 +50,11 @@ const RegisterForm = ({cb}:ModalRegisterFormProps) =>{
 
     const onSubmitFormik = async (values:any) => {
         try {
-            console.log("form submitted ", {values});
+            // console.log("form submitted ", {values});
             setIsFormLoading(true)
             const responsePost = await axios.post(`${BASE_URL}/users/`, values);
             setIsFormLoading(false)
-            console.log(">>>responsePost", {responsePost})
+            // console.log(">>>responsePost", {responsePost})
             cb()
         } catch (error:any ){ 
             const {message} = error;

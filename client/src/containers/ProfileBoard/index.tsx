@@ -17,12 +17,12 @@ const TodosBoard = () =>{
     const profileLoading = profileState && profileState.loading;
     const profileError = profileState && profileState.error;
     const profileErrMessage = profileState && profileState.message;
-    console.log(">>>profileboard", {profilePayload});
-    console.log({profileLoading})
+    // console.log(">>>profileboard", {profilePayload});
+    // console.log({profileLoading})
 
 
     useEffect(()=>{
-        console.log("profileactin", {profileAction})
+        // console.log("profileactin", {profileAction})
         dispatch(profileAction("") as unknown as AnyAction)
     }, [dispatch])
     return (

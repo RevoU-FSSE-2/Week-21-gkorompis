@@ -19,7 +19,7 @@ const TodosBoard = () =>{
     const jobsLoading = jobsState && jobsState.loading;
     const jobsError = jobsState && jobsState.error;
     const jobsErrMessage = jobsState && jobsState.message;
-    console.log(">>>jobsboard", {jobsPayload});
+    // console.log(">>>jobsboard", {jobsPayload});
 
 
     useEffect(()=>{
@@ -37,15 +37,22 @@ const TodosBoard = () =>{
                 <div className='jobs-placeholder'>
                     {
                         isCardDeck ?
-                            <div className="card-decks">
-                                {
+                            
+                                (
                                     jobsLoading ? <LoadingLinear message={"fetching"}/>:
                                     jobsError ? <p>error - {jobsErrMessage}</p> : 
-                                    jobsPayload.map((doc:any, key:any)=>{
-                                        return <Card document={doc} key={key}/>
-                                    })
-                                }
-                            </div> :
+                                     <div className="card-decks">
+                                        {
+                                            jobsPayload.map((doc:any, key:any)=>{
+                                                const uniqueKey = doc && doc._id;
+                                                // console.log(uniqueKey)
+                                                return <Card document={doc} key={uniqueKey}/>
+                                                
+                                            })
+                                        }
+                                     </div>
+                                )
+                             :
                             <div className="table-decks">
                                 {
                                     jobsLoading ? <LoadingLinear message={"fetching"}/> :

@@ -54,7 +54,7 @@ const dummyJobs= [
 
 const jobsAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
     try {
-        console.log(">>>jobsactions")
+        // console.log(">>>jobsactions")
         dispatch({type: actionTypes.loading});
         const allCookies = cookies.getAll();
         const {accessToken} = allCookies;
@@ -62,7 +62,7 @@ const jobsAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
           headers: {Authorization: `Bearer ${accessToken}`}
         }
         const responseFetch = await axios.get(`${BASE_URL}/jobs/`, config)
-        console.log("responseFetch jobs", {responseFetch});
+        // console.log("responseFetch jobs", {responseFetch});
         const data = responseFetch && responseFetch.data;
         const keys = Object.keys(data);
         const payload = keys[0] ? data : [];

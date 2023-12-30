@@ -65,7 +65,7 @@ const dummyProfile= [
 
 const followingAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
     try {
-        console.log(">>>followingaction")
+        // console.log(">>>followingaction")
         dispatch({type: actionTypes.loading});
         const allCookies = cookies.getAll();
         const {accessToken, sessionId} = allCookies;
@@ -82,7 +82,7 @@ const followingAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
             selfId = selfProfile && selfProfile["_id"]
         }
         const responseFetch = await axios.get(`${BASE_URL}/profile/pull-items/following/${selfId}`, config)
-        console.log(">>>>pulled followings", selfId, {responseFetch});
+        // console.log(">>>>pulled followings", selfId, {responseFetch});
         const data = responseFetch && responseFetch.data;
         const pulledItems = data && data.pulledItems;
         const payload = pulledItems || []

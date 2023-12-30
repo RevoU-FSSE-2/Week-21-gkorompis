@@ -48,7 +48,7 @@ const NewJobForm = ({cb}:ModalNewJobFormProps) =>{
     const onSubmitFormik = async (values:any) => {
         try {
             dispatch({type: "JOBS_LOADING"});
-            console.log("form submitted #2 ", {values});
+            // console.log("form submitted #2 ", {values});
             
             const allCookies = cookies.getAll();
             const {accessToken} = allCookies;
@@ -56,7 +56,7 @@ const NewJobForm = ({cb}:ModalNewJobFormProps) =>{
             headers: {Authorization: `Bearer ${accessToken}`}
             }
             const responsePost = await axios.post(`${BASE_URL}/jobs/`, values, config);
-            console.log({responsePost})
+            // console.log({responsePost})
             const data = responsePost && responsePost.data || "";
             dispatch(jobsAction("") as any);
             //  dispatch({type: "RELOADS_SUCCESS"});

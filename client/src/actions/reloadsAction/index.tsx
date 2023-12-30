@@ -8,7 +8,7 @@ const actionTypes = {
 
 const reloadsAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
     try {
-        console.log(">>>reloadsaction")
+        // console.log(">>>reloadsaction")
         dispatch({type: actionTypes.loading});
         const payload = reduxState || [];
         dispatch({type: actionTypes.success, payload});

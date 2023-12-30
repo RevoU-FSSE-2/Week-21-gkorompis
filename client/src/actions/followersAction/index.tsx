@@ -3,9 +3,9 @@ import { BASE_URL, cookies } from "../../utils/global"
 import axios from "axios"
 
 const actionTypes = {
-    loading: 'FOLLOWING_LOADING',
-    success: 'FOLLOWING_SUCCESS',
-    error: 'FOLLOWING_ERROR'
+    loading: 'FOLLOWERS_LOADING',
+    success: 'FOLLOWERS_SUCCESS',
+    error: 'FOLLOWERS_ERROR'
 }
 
 const dummyProfile= [
@@ -65,7 +65,7 @@ const dummyProfile= [
 
 const followingAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
     try {
-        console.log(">>>followingaction")
+        // console.log(">>>followingaction")
         dispatch({type: actionTypes.loading});
         const allCookies = cookies.getAll();
         const {accessToken, sessionId} = allCookies;
@@ -82,7 +82,7 @@ const followingAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
             selfId = selfProfile && selfProfile["_id"]
         }
         const responseFetch = await axios.get(`${BASE_URL}/profile/pull-items/followers/${selfId}`, config)
-        console.log({responseFetch, selfId});
+        // console.log({responseFetch, selfId});
         const data = responseFetch && responseFetch.data;
         const pulledItems = data && data.pulledItems;
         const payload = pulledItems || []

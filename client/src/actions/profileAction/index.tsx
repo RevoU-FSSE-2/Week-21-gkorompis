@@ -44,7 +44,7 @@ const dummyProfile= [
 
 const profileAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
     try {
-        console.log(">>>profileaction")
+        // console.log(">>>profileaction")
         dispatch({type: actionTypes.loading});
         const allCookies = cookies.getAll();
         const {accessToken} = allCookies;
@@ -52,7 +52,7 @@ const profileAction = (reduxState:any)=> async(dispatch:Dispatch) =>{
           headers: {Authorization: `Bearer ${accessToken}`}
         }
         const responseFetch = await axios.get(`${BASE_URL}/users/`, config)
-        console.log({responseFetch});
+        // console.log({responseFetch});
         const data = responseFetch && responseFetch.data;
 
         const payload = data || []

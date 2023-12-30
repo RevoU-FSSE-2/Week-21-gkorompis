@@ -13,7 +13,7 @@ import { useState } from "react";
 // import { APP_TITLE } from "../../utils/global";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { tweetsAction, tokensAction } from "../../actions";
+import { tweetsAction, tokensAction, reloadsAction } from "../../actions";
 
 interface ModalFormInitialValues {
     tweet: string,
@@ -48,7 +48,7 @@ const NewTweetForm = ({cb}:ModalNewTweetFormProps) =>{
     const onSubmitFormik = async (values:any) => {
         try {
             dispatch({type: "TWEETS_LOADING"});
-            console.log("form submitted #2 ", {values});
+            // console.log("form submitted #2 ", {values});
             
             const allCookies = cookies.getAll();
             const {accessToken} = allCookies;
@@ -56,9 +56,10 @@ const NewTweetForm = ({cb}:ModalNewTweetFormProps) =>{
             headers: {Authorization: `Bearer ${accessToken}`}
             }
             const responsePost = await axios.post(`${BASE_URL}/tweets/`, values, config);
-            console.log({responsePost})
+            // console.log({responsePost})
             const data = responsePost && responsePost.data || "";
             dispatch(tweetsAction("") as any);
+            dispatch(reloadsAction("") as any)
             //  dispatch({type: "RELOADS_SUCCESS"});
             cb()
         } catch (error:any ){ 

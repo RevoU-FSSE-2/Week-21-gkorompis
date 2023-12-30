@@ -5,25 +5,36 @@ import {useDispatch, useSelector} from 'react-redux';
 import { followersAction, followingAction, tweetsAction } from '../../actions';
 import { AnyAction } from '@reduxjs/toolkit';
 
-import { ButtonBar, Card, Infographics, ChunkTable, TweetCard, ProfileCard, LoadingLinear } from '../../components';
-import { cookies } from '../../utils/global';
+import { ButtonBar, Card, Infographics, ChunkTable, TweetCard, ProfileCard, LoadingLinear, TweetSection, FollowingSection, FollowersSection } from '../../components';
+import { BASE_URL, cookies } from '../../utils/global';
 import {NewTweetForm} from '..'
+import axios from 'axios';
 
-const TodosBoard = () =>{
+const TweetsBoard = () =>{
     const cookiesAll = cookies.getAll();
-    const {sessionId} = cookiesAll;
+    const {sessionId, profileId, accessToken} = cookiesAll;
     const dispatch = useDispatch();
 
     const [isCardDeck, setIsCardDeck] = useState(true);
     const [switched, setSwitched] = useState("");
     const [isNewTweetForm, setIsNewTweetForm] = useState(false);
+    const [tweetCount, setTweetCount] = useState(0);
+    const [selfCount, setSelfCount] = useState(0);
+    const [followingCount, setFollowingCount] = useState(0);
+    const [followersCount, setFollowersCount] = useState(0);
     
-    
-
+    const reloadSelector = useSelector((state:any)=>state.reloads);
     const tweetState = useSelector((state:any)=>state.tweets);
-
+    const tweetsLoad = tweetState && tweetState.payload || [];
+    const tweetsSelf = tweetsLoad.filter((x:any)=>{return x.createdBy == sessionId})
     const followingState = useSelector((state:any)=>state.following);
+    const followingLoad = followingState && followingState.payload || [];
+    
     const followersState = useSelector((state:any)=>state.followers);
+    const followersLoad = followersState && followersState.payload || [];
+
+    // setTweetCount(tweetsLoad.length)
+    // setSelfCount(tweetsSelf.length)
     
     const handleSwitch = (keyword:string)=>{
         setSwitched(keyword);
@@ -36,22 +47,70 @@ const TodosBoard = () =>{
         else if(keyword =="self"){
             const query = `/?createdBy=${sessionId}`;
             const reduxState = {query}
-            dispatch(tweetsAction(reduxState) as unknown as AnyAction)
+            dispatch(tweetsAction("") as unknown as AnyAction)
         } else {
             dispatch(tweetsAction("") as unknown as AnyAction)
         }
     }
 
     const handleNewTweet = () =>{
-        console.log(">>>handle new tweet", isNewTweetForm)
+        // console.log(">>>handle new tweet", isNewTweetForm)
         setIsNewTweetForm(true)
-        console.log(">>>handle new tweet", isNewTweetForm)
+        // console.log(">>>handle new tweet", isNewTweetForm)
     }
-    useEffect(()=>{
+
+    const checkProfileId = async ()=>{
+        const config = {
+          headers: {Authorization: `Bearer ${accessToken}`},
+          params: {username: sessionId}
+        }
+        if(profileId=="undefined" || !profileId[0]){
+            const fetchedProfile = await axios.get(`${BASE_URL}/profiles/`, config);
+            const data = fetchedProfile && fetchedProfile.data;
+            let keys = [] as any
+            if(data){
+                keys = Object.keys(data);
+            }
+            const profile = keys[0] ? data[0] : {};
+            const newProfileId = profile["_id"];
+            const following = profile["following"] || [];
+            const followers = profile["followers"] || [];
+            const followingCount = following.length;
+            const followersCount = followers.length;
+            setFollowingCount(followingCount)
+            setFollowersCount(followersCount)
+
+            cookies.set('profileId', newProfileId, {path: '/'})
+        } else {
+            const fetchedProfile = await axios.get(`${BASE_URL}/profiles/`, config);
+            const data = fetchedProfile && fetchedProfile.data;
+            let keys = [] as any
+            if(data){
+                keys = Object.keys(data);
+            }
+            const profile = keys[0] ? data[0] : {};
+            const newProfileId = profile["_id"];
+            const following = profile["following"] || [];
+            const followers = profile["followers"] || [];
+            // console.log(">>> fetchedProfiled", {profile})
+            const followingCount = following.length;
+            const followersCount = followers.length;
+            setFollowingCount(followingCount)
+            setFollowersCount(followersCount)
+        }
+    }
+    useEffect( ()=>{
         dispatch(tweetsAction("") as unknown as AnyAction)
-        // dispatch(followingAction("") as unknown as AnyAction)
-        // dispatch(followersAction("") as unknown as AnyAction)
-    }, [dispatch])
+        checkProfileId();
+        dispatch(followingAction("") as unknown as AnyAction)
+        dispatch(followersAction("") as unknown as AnyAction)
+        // console.log(">>> useEffect #", {tweetsLoad, tweetsSelf, tweetState})
+        
+        
+        // setFollowersCount(followersLoad.length)
+        // setFollowingCount(followingLoad.length)
+        // setFollowersCount(followersLoad.length)
+    }, [dispatch, reloadSelector])
     return (
         <>
             <div className="tweets-board">
@@ -63,19 +122,19 @@ const TodosBoard = () =>{
                 <div className='tweets-placeholder'>
                     <div className="tweets-section section-profile">
                         <div className="profile-box box-global" onClick={()=>handleSwitch("global")}>
-                            <p className="box-text-big">100</p>
+                            <p className="box-text-big">{tweetCount}</p>
                             <p className="box-text-small">global</p>
                         </div>
                         <div className="profile-box box-self" onClick={()=>handleSwitch("self")}>
-                            <p className="box-text-big">100</p>
+                            <p className="box-text-big">{selfCount}</p>
                             <p className="box-text-small">self</p>
                         </div>
                         <div className="profile-box box-followers" onClick={()=>handleSwitch("following")}>
-                            <p className="box-text-big">19</p>
+                            <p className="box-text-big">{followingCount}</p>
                             <p className="box-text-small">following</p>
                         </div>
                         <div className="profile-box box-following" onClick={()=>handleSwitch("followers")}>
-                            <p className="box-text-big">13</p>
+                            <p className="box-text-big">{followersCount}</p>
                             <p className="box-text-small">followers</p>
                         </div>
                     </div>
@@ -86,14 +145,14 @@ const TodosBoard = () =>{
                         
                         {
                             switched ==  "global" ?
-                            <TweetSection states ={tweetState} /> : 
+                            <TweetSection states ={tweetState} handlers={{setTweetCount, setSelfCount}} data={{sessionId}}/> : 
                             switched == "self" ?
-                            <TweetSection states ={tweetState}/> :
+                            <TweetSection states ={tweetState} handlers={{setTweetCount, setSelfCount}} data={{sessionId}}/> :
                             switched == "following" ?
-                            <FollowingSection states ={followingState} /> :
+                            <FollowingSection states ={followingState} handlers={{setFollowingCount}} /> :
                             switched == "followers" ?
-                            <FollowersSection states ={followersState} /> :
-                            <TweetSection states={tweetState}/> 
+                            <FollowersSection states ={followersState} handlers={{setFollowersCount}} /> :
+                            <TweetSection states ={tweetState} handlers={{setTweetCount, setSelfCount}} data={{sessionId}}/> 
 
                         }
                     </div>
@@ -111,67 +170,51 @@ const TodosBoard = () =>{
     )
 };
 
-export default TodosBoard;
+export default TweetsBoard;
 
-const TweetSection =({states}:any)=>{
-    const tweetsPayload = states && states.payload || [];
-    const tweetsLoading = states && states.loading;
-    const tweetsError = states && states.error;
-    const tweetsErrMessage = states && states.message;
-    console.log(">>>> TweetSection", states);
-    return (
-        <>
-            {
-                tweetsLoading ? <LoadingLinear message={"fetching"}/>  : 
-                tweetsError ? <h1>error</h1> :
-                tweetsPayload[0] ?
-                tweetsPayload.reverse().map((x:any, key:any)=>{
-                    return <TweetCard data={x}/>
-                }) : <p className='box-text-small'>0 tweets</p>
-            }
-        </>
-    )
-};
+// const FollowingSection =({states, handlers}:any)=>{
+//     const followingPayload = states && states.payload || [];
+//     const followingLoading = states && states.loading;
+//     const followingError = states && states.error;
+//     const followingErrMessage = states && states.message;
+//     const {setFollowingCount} = handlers;
+//     setFollowingCount(followingPayload.length)
+//     // console.log(">>>> TweetSection", states);
+//     return (
+//         <>
+//             {
+//                 followingLoading ? <LoadingLinear message={"fetching"}/> : 
+//                 followingError ? <h1>error</h1> :
+//                 followingPayload[0] ? 
+//                 followingPayload.map((x:any, key:any)=>{
+//                     return <ProfileCard data={x}/>
+//                 }) : <p className='box-text-small'>0 following</p>
+//             }
 
-const FollowingSection =({states}:any)=>{
-    const followingPayload = states && states.payload || [];
-    const followingLoading = states && states.loading;
-    const followingError = states && states.error;
-    const followingErrMessage = states && states.message;
-    console.log(">>>> TweetSection", states);
-    return (
-        <>
-            {
-                followingLoading ? <LoadingLinear message={"fetching"}/> : 
-                followingError ? <h1>error</h1> :
-                followingPayload[0] ? 
-                followingPayload.map((x:any, key:any)=>{
-                    return <ProfileCard data={x}/>
-                }) : <p className='box-text-small'>0 following</p>
-            }
+//         </>
+//     )
+// }
 
-        </>
-    )
-}
+// const FollowersSection =({states, handlers}:any)=>{
+//     const followersPayload = states && states.payload || [];
+//     const followersLoading = states && states.loading;
+//     const followersError = states && states.error;
+//     const followersErrMessage = states && states.message;
+//     const {setFollowersCount} = handlers;
+//     setFollowersCount(followersPayload.length)
+//     // console.log(">>>> TweetSection", states);
+//     return (
+//         <>
+//             {
+//                 followersLoading ? <LoadingLinear message={"fetching"}/> : 
+//                 followersError ? <h1>error</h1> :
+//                 !followersPayload[0] ? <p className='box-text-small'>0 followers</p> :
+//                 followersPayload.map((x:any, key:any)=>{
+//                     return <ProfileCard data={x}/>
+//                 })
+//             }
 
-const FollowersSection =({states}:any)=>{
-    const followersPayload = states && states.payload || [];
-    const followersLoading = states && states.loading;
-    const followersError = states && states.error;
-    const followersErrMessage = states && states.message;
-    console.log(">>>> TweetSection", states);
-    return (
-        <>
-            {
-                followersLoading ? <LoadingLinear message={"fetching"}/> : 
-                followersError ? <h1>error</h1> :
-                !followersPayload[0] ? <p className='box-text-small'>0 followers</p> :
-                followersPayload.map((x:any, key:any)=>{
-                    return <ProfileCard data={x}/>
-                })
-            }
-
-        </>
-    )
-}
+//         </>
+//     )
+// }
 

@@ -12,3 +12,7 @@ export { default as ProfileCard} from './ProfileCard'
 
 export { default as LoadingLinear } from './LoadingLinear'
 export { default as LoadingLinearFloat } from './LoadingLinearFloat'
+
+export { default as FollowingSection } from './FollowingSection'
+export { default as FollowersSection } from './FollowersSection'
+export { default as TweetSection } from './TweetSection'

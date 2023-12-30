@@ -31,8 +31,8 @@ const Infographics = ({data}: InfographicsProps) =>{
     
     const isSmall = +percentageDone <= 45 ? true:false;
     const isTooSmall =  +percentageDone <= 10 ? true:false;
-    console.log(50||percentageDone, isSmall, {percentageDone})
-    console.log(isSmall ? barStyleSmall : barStyleUsual)
+    // console.log(50||percentageDone, isSmall, {percentageDone})
+    // console.log(isSmall ? barStyleSmall : barStyleUsual)
     return (
         <>
             <div className="infographics-div">
